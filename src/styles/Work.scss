@@ -1,0 +1,62 @@
+.work-title {
+    margin: 40px 0 10px 0;
+    font-size: 20px;
+
+    .listIcon {
+        margin-right: 10px;
+    }
+}
+
+.work-describe {
+    color: #c5c6c7;
+}
+.editIcon {
+    margin-right: 10px;
+    color: #66fcf1;
+    cursor: pointer;
+    transition: color 0.2s;
+
+    &:hover {
+      color: #fff;
+    }
+}
+
+.work {
+    position: relative;
+    padding: 10px;
+    margin: 10px 0;
+    background-color: #1f2833;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background-color 0.3s;
+  
+    &:hover {
+      background-color: #45a29e;
+    }
+  
+    .work-buttons {
+      display: none; /* Ẩn các nút mặc định */
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+  
+    &:hover .work-buttons {
+      display: flex; /* Hiển thị các nút khi di chuột */
+    }
+  
+    .editIcon,
+    .checkIcon,
+    .starIcon {
+      margin-left: 10px;
+      cursor: pointer;
+      transition: color 0.2s;
+  
+      &:hover {
+        color: #fff;
+      }
+    }
+}

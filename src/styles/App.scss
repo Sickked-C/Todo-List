@@ -1,0 +1,20 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    color: #fff;
+}
+
+body {
+    font-family: 'Segoe UI';
+    display: flex;
+    justify-content: center;
+    background-color: #0b0c10;
+
+    .app-title {
+        margin: 40px 0;
+        color: #66fcf1;
+        font-size: 50px;
+        font-weight: bold;
+    }
+}

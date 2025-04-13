@@ -1,0 +1,37 @@
+label {
+    font-size: 20px;
+    margin-top: 40px;
+    margin-bottom: 10px;
+    display: block;
+
+    .addIcon {
+        margin-right: 10px;
+    }
+}
+
+input {
+    height: 40px;
+    width: 50vw;
+    padding: 8px;
+    background-color: #1f2833;
+    border: 2px solid #45a29e;
+    border-radius: 4px;
+    outline: none;
+    transition: all 0.2s;
+}
+
+input[type="text"] {
+    &:focus {
+        box-shadow: 0 0 8px #66fcf1;
+    }
+}
+
+input[type="submit"] {
+    width: auto;
+    margin-left: 10px;
+    cursor: pointer;
+
+    &:hover {
+        border-color: #fff;
+    }
+}
