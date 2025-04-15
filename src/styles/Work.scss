@@ -60,3 +60,56 @@
       }
     }
 }
+
+.work-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.work-header,
+.work-item {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr 1fr 2fr;
+  gap: 10px;
+  padding: 10px;
+  background-color: #1f2833;
+  border: 1px solid #45a29e;
+  border-radius: 5px;
+  color: #c5c6c7;
+}
+
+.work-header {
+  font-weight: bold;
+  background-color: #0b0c10;
+  color: #66fcf1;
+}
+
+.work-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.editIcon {
+  cursor: pointer;
+  color: #66fcf1;
+  transition: color 0.3s;
+}
+
+.editIcon:hover {
+  color: #45a29e;
+}
+
+.checkIcon {
+  cursor: pointer;
+  color: #4caf50;
+  transition: color 0.3s;
+}
+
+.checkIcon:hover {
+  color: #388e3c;
+}
+
+.work-item:nth-child(even) {
+  background-color: #0b0c10;
+}

@@ -24,23 +24,24 @@ class App extends React.Component {
   };
 
   // Thêm công việc mới
-  addWork = (workName) => {
+  addWork = (workName, day, date, time) => {
     const prediction = predictFromLearningData(workName);
     const newWork = {
       id: Date.now(),
       name: workName,
-      priority: prediction.priority,
-      time: prediction.time,
+      priority: prediction.priority, // Ưu tiên
+      time, // Thời gian (hh:mm)
+      day, // Thứ trong tuần (Monday, Tuesday, ...)
+      date, // Ngày/tháng/năm
       isDaily: false,
       createdAt: new Date().toLocaleString(),
     };
-    this.setState(
-      (prevState) => {
-        const updatedWorkList = [...prevState.workList, newWork];
-        this.saveToLocalStorage("workList", updatedWorkList);
-        return { workList: updatedWorkList };
-      }
-    );
+
+    this.setState((prevState) => {
+      const updatedWorkList = [...prevState.workList, newWork];
+      this.saveToLocalStorage("workList", updatedWorkList);
+      return { workList: updatedWorkList };
+    });
   };
 
   // Xóa công việc
@@ -108,12 +109,82 @@ class App extends React.Component {
     this.setState({ workList, history });
   }
 
+  toggleDailyWork = (id) => {
+    this.setState((prevState) => {
+      const updatedWorkList = prevState.workList.map((work) =>
+        work.id === id ? { ...work, isDaily: !work.isDaily } : work
+      );
+      this.saveToLocalStorage("workList", updatedWorkList);
+      return { workList: updatedWorkList };
+    });
+  };
+
+  // Hàm sửa nội dung công việc
+  editWorkName = (id) => {
+    const newName = prompt("Nhập nội dung công việc mới:");
+    if (newName) {
+      this.setState((prevState) => {
+        const updatedWorkList = prevState.workList.map((work) =>
+          work.id === id ? { ...work, name: newName } : work
+        );
+        this.saveToLocalStorage("workList", updatedWorkList);
+        return { workList: updatedWorkList };
+      });
+    }
+  };
+
+  // Hàm sửa thời gian, ngày, hoặc thứ
+  editWorkDetails = (id, field) => {
+    if (field === "time") {
+      const newTime = prompt("Nhập thời gian mới (hh:mm):");
+      if (newTime) {
+        this.setState((prevState) => {
+          const updatedWorkList = prevState.workList.map((work) =>
+            work.id === id ? { ...work, time: newTime } : work
+          );
+          this.saveToLocalStorage("workList", updatedWorkList);
+          return { workList: updatedWorkList };
+        });
+      }
+    } else if (field === "date") {
+      const newDate = prompt("Nhập ngày mới (yyyy-mm-dd):");
+      if (newDate) {
+        const newDay = this.getDayFromDate(newDate); // Tính toán thứ từ ngày
+        this.setState((prevState) => {
+          const updatedWorkList = prevState.workList.map((work) =>
+            work.id === id ? { ...work, date: newDate, day: newDay } : work
+          );
+          this.saveToLocalStorage("workList", updatedWorkList);
+          return { workList: updatedWorkList };
+        });
+      }
+    } else if (field === "day") {
+      const newDay = prompt("Nhập thứ mới (Monday, Tuesday, ...):");
+      if (newDay) {
+        this.setState((prevState) => {
+          const updatedWorkList = prevState.workList.map((work) =>
+            work.id === id ? { ...work, day: newDay } : work
+          );
+          this.saveToLocalStorage("workList", updatedWorkList);
+          return { workList: updatedWorkList };
+        });
+      }
+    }
+  };
+
+  // Hàm tính toán thứ từ ngày
+  getDayFromDate = (date) => {
+    const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+    const dayIndex = new Date(date).getDay();
+    return days[dayIndex];
+  };
+
   render() {
     return (
       <Router>
         <div>
           <nav>
-            <Link to="/">Trang chính</Link> | <Link to="/history">Lịch sử</Link>
+            <Link to="/">Trang chính</Link><Link to="/history">Lịch sử</Link>
           </nav>
           <Routes>
             <Route
@@ -126,6 +197,9 @@ class App extends React.Component {
                     workList={this.state.workList}
                     deleteWork={this.deleteWork}
                     completeWork={this.completeWork}
+                    toggleDailyWork={this.toggleDailyWork} // Thêm hàm toggleDailyWork
+                    editWorkName={this.editWorkName} // Truyền hàm sửa nội dung
+                    editWorkDetails={this.editWorkDetails} // Truyền hàm sửa thời gian
                   />
                 </div>
               }

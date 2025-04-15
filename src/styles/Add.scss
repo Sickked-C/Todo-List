@@ -1,37 +1,66 @@
-label {
-    font-size: 20px;
-    margin-top: 40px;
-    margin-bottom: 10px;
-    display: block;
+.task-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 20px;
+  background-color: #1f2833;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
 
-    .addIcon {
-        margin-right: 10px;
-    }
+.form-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+label {
+  width: 120px;
+  font-weight: bold;
+  color: #66fcf1;
 }
 
 input {
-    height: 40px;
-    width: 50vw;
-    padding: 8px;
-    background-color: #1f2833;
-    border: 2px solid #45a29e;
-    border-radius: 4px;
-    outline: none;
-    transition: all 0.2s;
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #45a29e;
+  border-radius: 5px;
+  background-color: #0b0c10;
+  color: #c5c6c7;
+}
+
+input:focus {
+  outline: none;
+  border-color: #66fcf1;
 }
 
 input[type="text"] {
-    &:focus {
-        box-shadow: 0 0 8px #66fcf1;
-    }
+  &:focus {
+    box-shadow: 0 0 8px #66fcf1;
+  }
 }
 
 input[type="submit"] {
-    width: auto;
-    margin-left: 10px;
-    cursor: pointer;
+  width: auto;
+  margin-left: 10px;
+  cursor: pointer;
 
-    &:hover {
-        border-color: #fff;
-    }
+  &:hover {
+    border-color: #fff;
+  }
+}
+
+.add-button {
+  padding: 10px 20px;
+  background-color: #45a29e;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.add-button:hover {
+  background-color: #66fcf1;
 }
